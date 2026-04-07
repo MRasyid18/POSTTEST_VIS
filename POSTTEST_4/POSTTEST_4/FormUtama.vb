@@ -112,16 +112,20 @@ Public Class FormUtama
             DataModule.Peran = "Anggota"
         End If
 
-        Dim hobi As New List(Of String)
-        If chkCoding.Checked Then hobi.Add("Coding")
-        If chkDesain.Checked Then hobi.Add("UI/UX Design")
-        If chkGame.Checked Then hobi.Add("Game")
-        If chkData.Checked Then hobi.Add("Data Analysis")
-        If chkMobile.Checked Then hobi.Add("Mobile Development")
-        If chkHacking.Checked Then hobi.Add("Hacking")
-        If chkCloud.Checked Then hobi.Add("Cloud Computing")
-        If chkAI.Checked Then hobi.Add("AI")
-        DataModule.DaftarHobi = String.Join(", ", hobi)
+        Dim hobi As String = ""
+        If chkCoding.Checked Then hobi &= "Coding, "
+        If chkDesain.Checked Then hobi &= "UI/UX Design, "
+        If chkGame.Checked Then hobi &= "Game, "
+        If chkData.Checked Then hobi &= "Data Analysis, "
+        If chkMobile.Checked Then hobi &= "Mobile Development, "
+        If chkHacking.Checked Then hobi &= "Hacking, "
+        If chkCloud.Checked Then hobi &= "Cloud Computing, "
+        If chkAI.Checked Then hobi &= "AI, "
+
+        If hobi.Length > 0 Then
+            hobi = hobi.Substring(0, hobi.Length - 2)
+        End If
+        DataModule.DaftarHobi = hobi
     End Sub
 
     Private Sub btnLanjut1_Click(sender As Object, e As EventArgs) _
@@ -234,7 +238,7 @@ Public Class FormUtama
 
                     If ext = ".csv" Then
                         content = "Nama,ID,Tanggal Lahir,Jenis Kelamin,Komunitas,Telepon,Email,Alamat,Peran,Hobi" & vbCrLf
-                        content &= $"""{DataModule.NamaAnggota}"",""{DataModule.IdAnggota}"",""{DataModule.TanggalLahir}"",""{DataModule.JenisKelamin}"",""{DataModule.JenisKomunitas}"",""{DataModule.NomorTelepon}"",""{DataModule.Email}"",""{DataModule.Alamat}"",""{DataModule.Peran}"",""{DataModule.DaftarHobi}"""
+                        content &= """" & DataModule.NamaAnggota & """,""" & DataModule.IdAnggota & """,""" & DataModule.TanggalLahir & """,""" & DataModule.JenisKelamin & """,""" & DataModule.JenisKomunitas & """,""" & DataModule.NomorTelepon & """,""" & DataModule.Email & """,""" & DataModule.Alamat & """,""" & DataModule.Peran & """,""" & DataModule.DaftarHobi & """"
                     Else
                         content = "===== DATA ANGGOTA NEXUS COMMUNITY =====" & vbCrLf
                         content &= "Nama          : " & DataModule.NamaAnggota & vbCrLf
